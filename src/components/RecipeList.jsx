@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 // components
@@ -8,6 +8,7 @@ import Loading from './Loading';
 import Filters from './Filters';
 
 const Recipe = ({ recipes }) => {
+  const { id } = useParams();
   const { isLoading, search } = useSelector((state) => state.recipe);
 
   if (isLoading) {
@@ -16,7 +17,11 @@ const Recipe = ({ recipes }) => {
 
   return (
     <Wrapper className='section-center'>
-      {search && <h1>recipe results for {search} </h1>}
+      {id ? (
+        <h2>recipe results for {id} </h2>
+      ) : (
+        <h2>recipe results for {search} </h2>
+      )}
       <div className='recipe'>
         <Filters />
         <div className='recipe-card'>
@@ -37,8 +42,8 @@ const Recipe = ({ recipes }) => {
 };
 
 const Wrapper = styled.article`
-  h1 {
-    padding: 2rem 2.5rem;
+  h2 {
+    padding: 1rem 1.5rem;
     background: var(--clr-grey-10);
     box-shadow: var(--light-shadow);
     border-radius: var(--radius);

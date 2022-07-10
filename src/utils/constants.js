@@ -78,3 +78,24 @@ export const recipeCategories = [
     url: 'salad',
   },
 ];
+
+export const cuisineFilters = [
+  'African',
+  'Chinese',
+  'Greek',
+  'Indian',
+  'Italian',
+  'Mexican',
+  'Mediterranean',
+  'Spanish',
+];
+
+export const dietFilters = [
+  'All',
+  'Gluten Free',
+  'Ketogenic',
+  'Vegetarian',
+  'Vegan',
+  'Pescetarian',
+  'Whole30',
+];

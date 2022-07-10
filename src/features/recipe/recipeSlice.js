@@ -4,6 +4,8 @@ import customFetch from '../../utils/axios';
 
 const initialFilterState = {
   search: '',
+  cuisine: '',
+  diet: '',
 };
 
 const initialState = {
@@ -70,6 +72,9 @@ const recipeSlice = createSlice({
     handleChange: (state, { payload: { name, value } }) => {
       state[name] = value;
     },
+    clearFilters: (state) => {
+      return { ...state, ...initialFilterState };
+    },
     clearState: () => initialState,
   },
   extraReducers: {
@@ -109,7 +114,12 @@ const recipeSlice = createSlice({
   },
 });
 
-export const { openSidebar, closeSidebar, handleChange, clearState } =
-  recipeSlice.actions;
+export const {
+  openSidebar,
+  closeSidebar,
+  handleChange,
+  clearFilters,
+  clearState,
+} = recipeSlice.actions;
 
 export default recipeSlice.reducer;

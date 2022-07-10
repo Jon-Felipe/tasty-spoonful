@@ -21,7 +21,7 @@ const Search = ({ name, value, placeholder, handleChange, handleKeyDown }) => {
 const Wrapper = styled.div`
   width: 100%;
   max-width: 450px;
-  padding: 10px 15px;
+  padding: 5px 10px;
   border: 1px solid var(--clr-grey-7);
   border-radius: var(--radius);
   box-shadow: var(--light-shadow);
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   input {
     border: transparent;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
   input:focus {
     outline: none;

@@ -24,18 +24,6 @@ const Category = () => {
   return (
     <Wrapper className='page-100'>
       <div className='section-center category'>
-        <div className='category-header title'>
-          <h2>{id} recipes</h2>
-          <div className='underline'></div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione sed
-            aliquam quia incidunt tempore adipisci aut quos! Ad nesciunt
-            doloremque aperiam inventore fuga itaque, sequi dolorem quaerat
-            tempora omnis hic nulla animi error totam expedita numquam quae
-            officia placeat ea pariatur fugit? Magni, tempore! Provident cum
-            quia praesentium libero ipsum.
-          </p>
-        </div>
         <RecipeList recipes={recipes} />
       </div>
     </Wrapper>
@@ -44,7 +32,6 @@ const Category = () => {
 
 const Wrapper = styled.main`
   width: 100%;
-  background: linear-gradient(to bottom, #fff 10%, #f0f9f9 15%);
 
   .category-header p {
     margin: 1rem 0;
