@@ -21,7 +21,7 @@ const Recipe = ({ recipes }) => {
         <Filters />
         <div className='recipe-card'>
           {recipes.map((recipe) => (
-            <Link to={`/recipes/${recipe.id}`} key={recipe.id}>
+            <Link to={`/recipe/${recipe.id}`} key={recipe.id}>
               <div className='recipe-card-content'>
                 <img src={recipe.image} alt={recipe.title} />
                 <div className='recipe-card-info'>

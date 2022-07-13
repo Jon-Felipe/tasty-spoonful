@@ -10,12 +10,14 @@ import Loading from '../components/Loading';
 
 const Recipes = () => {
   const dispatch = useDispatch();
-  const { recipes, isLoading } = useSelector((state) => state.recipe);
+  const { recipes, isLoading, cuisine, diet } = useSelector(
+    (state) => state.recipe
+  );
   const { type } = useParams();
 
   useEffect(() => {
     dispatch(getRecipes(type));
-  }, [type]);
+  }, [type, cuisine, diet]);
 
   if (isLoading) {
     return <Loading />;

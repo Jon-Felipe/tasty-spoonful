@@ -17,7 +17,6 @@ const Filters = () => {
 
     if (name === 'cuisine') {
       value = e.target.textContent;
-      console.log(value, 'value');
     }
 
     dispatch(handleChange({ name, value }));

@@ -19,9 +19,10 @@ const initialState = {
 export const getRecipes = createAsyncThunk(
   'recipes/getRecipes',
   async (type, thunkAPI) => {
+    const { diet, cuisine } = thunkAPI.getState().recipe;
     try {
       const response = await customFetch.get(
-        `/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${type}`
+        `/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${type}&cuisine=${cuisine}&diet=${diet}`
       );
       return response.data.results;
     } catch (error) {
