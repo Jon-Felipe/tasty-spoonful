@@ -4,21 +4,16 @@ import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 // components
-import Loading from './Loading';
 import Filters from './Filters';
 
 const Recipe = ({ recipes }) => {
-  const { id } = useParams();
-  const { isLoading, search } = useSelector((state) => state.recipe);
-
-  if (isLoading) {
-    return <Loading />;
-  }
+  const { type } = useParams();
+  const { search } = useSelector((state) => state.recipe);
 
   return (
     <Wrapper className='section-center'>
-      {id ? (
-        <h2>recipe results for {id} </h2>
+      {type ? (
+        <h2>recipe results for {type} </h2>
       ) : (
         <h2>recipe results for {search} </h2>
       )}
@@ -51,6 +46,7 @@ const Wrapper = styled.article`
   }
   .recipe {
     display: grid;
+    margin-top: 2.5rem;
   }
   .recipe-card {
     display: grid;

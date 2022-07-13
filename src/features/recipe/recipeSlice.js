@@ -18,25 +18,10 @@ const initialState = {
 
 export const getRecipes = createAsyncThunk(
   'recipes/getRecipes',
-  async (_, thunkAPI) => {
-    const { search } = thunkAPI.getState().recipe;
-    try {
-      const response = await customFetch.get(
-        `/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${search}`
-      );
-      return response.data.results;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const getCategoryRecipes = createAsyncThunk(
-  'recipes/getByCategory',
   async (type, thunkAPI) => {
     try {
       const response = await customFetch.get(
-        `complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&type=${type}&addRecipeNutrition=true`
+        `/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${type}`
       );
       return response.data.results;
     } catch (error) {
@@ -86,17 +71,6 @@ const recipeSlice = createSlice({
       state.recipes = payload;
     },
     [getRecipes.rejected]: (state, { payload }) => {
-      state.isLoading = false;
-      toast.error(payload.message);
-    },
-    [getCategoryRecipes.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [getCategoryRecipes.fulfilled]: (state, { payload }) => {
-      state.isLoading = false;
-      state.recipes = payload;
-    },
-    [getCategoryRecipes.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload.message);
     },

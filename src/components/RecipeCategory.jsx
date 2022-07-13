@@ -23,11 +23,7 @@ const RecipeCategory = () => {
           {recipeCategories.map((category) => {
             const { id, title, image, url } = category;
             return (
-              <Link
-                to={`category/${url}`}
-                key={id}
-                className='category-content'
-              >
+              <Link to={`recipes/${url}`} key={id} className='category-content'>
                 <h4>{title} recipes</h4>
                 <img src={image} alt={title} />
               </Link>

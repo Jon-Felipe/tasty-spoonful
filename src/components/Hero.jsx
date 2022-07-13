@@ -20,7 +20,7 @@ const Hero = () => {
     if (key === 'Enter' && !search) {
       toast.error('please enter a search value');
     } else if (key === 'Enter' && search) {
-      navigate('/recipes');
+      navigate(`/recipes/${search}`);
     }
   };
 
