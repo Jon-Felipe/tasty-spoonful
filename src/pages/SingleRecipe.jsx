@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { BiUser, BiAlarm, BiHeart } from 'react-icons/bi';
-import { getSingleRecipe } from '../features/recipe/recipeSlice';
+import {
+  getSingleRecipe,
+  getRecipeNutrition,
+} from '../features/recipe/recipeSlice';
 
 // components
 import Loading from '../components/Loading';
@@ -11,10 +14,13 @@ import Loading from '../components/Loading';
 const SingleRecipe = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { isLoading, recipe } = useSelector((state) => state.recipe);
+  const { isLoading, recipe, recipeNutrition } = useSelector(
+    (state) => state.recipe
+  );
 
   useEffect(() => {
     dispatch(getSingleRecipe(id));
+    dispatch(getRecipeNutrition(id));
   }, [id]);
 
   if (isLoading) {
@@ -48,6 +54,23 @@ const SingleRecipe = () => {
                 <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
               </div>
             </div>
+            <div className='recipe-nutrition'>
+              <h3>nutrition facts</h3>
+              <div className='nutrition-info'>
+                <p>
+                  {recipeNutrition.calories} <span>calories</span>
+                </p>
+                <p>
+                  {recipeNutrition.carbs} <span>carbs</span>
+                </p>
+                <p>
+                  {recipeNutrition.fat} <span>fat</span>
+                </p>
+                <p>
+                  {recipeNutrition.protein} <span>protein</span>
+                </p>
+              </div>
+            </div>
           </div>
           <div className='single-recipe-instructions'>
             <div className='single-recipe-ingredients'>
@@ -60,13 +83,13 @@ const SingleRecipe = () => {
             </div>
             <div className='single-recipe-directions'>
               <h3>directions</h3>
-              {recipe?.analyzedInstructions?.map((instruction) =>
-                instruction.steps.map((item, index) => (
-                  <ol key={index}>
-                    <li>{item.step}</li>
-                  </ol>
-                ))
-              )}
+              <ol>
+                {recipe?.analyzedInstructions?.map((instruction) =>
+                  instruction.steps.map((item, index) => (
+                    <li key={index}>{item.step}</li>
+                  ))
+                )}
+              </ol>
             </div>
           </div>
         </article>
@@ -131,6 +154,37 @@ const Wrapper = styled.main`
       margin: 1rem 0;
       letter-spacing: 1px;
       line-height: 2;
+    }
+  }
+  .recipe-nutrition {
+    border: 4px solid var(--clr-primary-8);
+    border-radius: var(--radius);
+    padding: 10px 15px;
+    width: 100%;
+    max-width: 500px;
+    h3 {
+      border-bottom: 2px solid var(--clr-primary-6);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .nutrition-info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      p {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1.5rem;
+        color: var(--clr-primary-7);
+        span {
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          color: var(--clr-black);
+        }
+      }
     }
   }
 `;

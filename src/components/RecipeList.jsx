@@ -6,17 +6,13 @@ import styled from 'styled-components';
 // components
 import Filters from './Filters';
 
-const Recipe = ({ recipes }) => {
+const RecipeList = ({ recipes }) => {
   const { type } = useParams();
   const { search } = useSelector((state) => state.recipe);
 
   return (
     <Wrapper className='section-center'>
-      {type ? (
-        <h2>recipe results for {type} </h2>
-      ) : (
-        <h2>recipe results for {search} </h2>
-      )}
+      {type && <h2>recipe results for {type} </h2>}
       <div className='recipe'>
         <Filters />
         <div className='recipe-card'>
@@ -100,4 +96,4 @@ const Wrapper = styled.article`
   }
 `;
 
-export default Recipe;
+export default RecipeList;

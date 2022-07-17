@@ -13,6 +13,7 @@ const initialState = {
   isLoading: false,
   recipes: [],
   recipe: {},
+  recipeNutrition: {},
   ...initialFilterState,
 };
 
@@ -37,6 +38,20 @@ export const getSingleRecipe = createAsyncThunk(
     try {
       const response = await customFetch.get(
         `${id}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getRecipeNutrition = createAsyncThunk(
+  'recipe/getRecipeNutrition',
+  async (id, thunkAPI) => {
+    try {
+      const response = await customFetch.get(
+        `${id}/nutritionWidget.json?apiKey=${process.env.REACT_APP_API_KEY}`
       );
       return response.data;
     } catch (error) {
@@ -83,6 +98,13 @@ const recipeSlice = createSlice({
       state.recipe = payload;
     },
     [getSingleRecipe.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload.message);
+    },
+    [getRecipeNutrition.fulfilled]: (state, { payload }) => {
+      state.recipeNutrition = payload;
+    },
+    [getRecipeNutrition.rejected]: (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload.message);
     },

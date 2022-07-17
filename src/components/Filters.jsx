@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { toast } from 'react-toastify';
 import { handleChange, clearFilters } from '../features/recipe/recipeSlice';
 
 // data & components
@@ -20,15 +19,6 @@ const Filters = () => {
     }
 
     dispatch(handleChange({ name, value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!cuisine && !diet) {
-      toast.error('please choose a filter');
-      return;
-    }
   };
 
   return (
@@ -70,20 +60,13 @@ const Filters = () => {
             </select>
           </div>
         </div>
-        <div className='filter-btns'>
+        <div className='filter-btn'>
           <button
             type='button'
             className='btn clear-btn'
             onClick={() => dispatch(clearFilters())}
           >
             clear
-          </button>
-          <button
-            type='submit'
-            className='btn submit-btn'
-            onClick={handleSubmit}
-          >
-            submit
           </button>
         </div>
       </div>
@@ -150,10 +133,8 @@ const Wrapper = styled.article`
       }
     }
   }
-  .filter-btns {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  .filter-btn {
+    display: block;
     .btn {
       width: 100%;
     }
